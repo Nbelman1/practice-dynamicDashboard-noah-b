@@ -16,17 +16,11 @@ const DynamicDashboard = () => {
     ];
     const checkEmoji = "\u2705"; // ✅
     const xEmoji = "\u274c"; // ❌
-    
-    function isCompletedEmoji(task) {
-        if (task.isCompleted) {
-            return checkEmoji;
-        } else if (!task.isCompleted) {
-            return xEmoji;
-        }
-    };
+
+    const emojiIfCompleted = (task) => task.isCompleted? checkEmoji : xEmoji;
 
     const renderTaskList = myTasks.map((task) => 
-        <li>{isCompletedEmoji(task)} {task.name}</li>
+        <li>{emojiIfCompleted(task)} {task.name}</li>
     );
 
     // return statement
