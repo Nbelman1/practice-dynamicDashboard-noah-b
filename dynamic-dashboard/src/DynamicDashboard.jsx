@@ -19,8 +19,18 @@ const DynamicDashboard = () => {
 
     const emojiIfCompleted = (task) => task.isCompleted? checkEmoji : xEmoji;
 
+    const greenIfCompleted = (task) => {
+        if (task.isCompleted) {
+            return `{color: "green"}`;
+        }
+    }
+
+    // iterate through task list, return "emoji" "task name"
     const renderTaskList = myTasks.map((task) => 
-        <li>{emojiIfCompleted(task)} {task.name}</li>
+        // use ternary operator as style prop inside li element
+        <li style={task.isCompleted ? {color: "green"} : {}}> 
+            {emojiIfCompleted(task)} {task.name} {greenIfCompleted(task)}
+        </li>
     );
 
     // return statement
