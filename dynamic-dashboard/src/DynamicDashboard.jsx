@@ -19,19 +19,19 @@ const DynamicDashboard = () => {
 
     const emojiIfCompleted = (task) => task.isCompleted? checkEmoji : xEmoji;
 
-    const greenIfCompleted = (task) => {
-        if (task.isCompleted) {
-            return `{color: "green"}`;
-        }
-    }
-
     // iterate through task list, return "emoji" "task name"
     const renderTaskList = myTasks.map((task) => 
-        // use ternary operator as style prop inside li element
+        // turn text green if task is complete
         <li style={task.isCompleted ? {color: "green"} : {}}> 
-            {emojiIfCompleted(task)} {task.name} {greenIfCompleted(task)}
+            {emojiIfCompleted(task)} {task.name}
         </li>
     );
+
+    // returns length of array with completed tasks in it
+    const countCompletedTasks = myTasks.filter(task => task.isCompleted).length;
+
+    // returns length of array with incompleted tasks in it 
+    const countIncompleteTasks = myTasks.filter(task => !task.isCompleted).length;
 
     // return statement
     return (
@@ -40,6 +40,8 @@ const DynamicDashboard = () => {
             <h1>{renderUserGreeting}</h1>
             <h2>{subscriptionMsg}</h2>
             <ul>{renderTaskList}</ul>
+            <h3>Tasks Completed: {countCompletedTasks}</h3>
+            <h3>Tasks Incomplete: {countIncompleteTasks}</h3>
         </div>
     );
 }
